@@ -1,8 +1,8 @@
 package com.example.management.controllers;
 
 import com.example.management.models.Student;
-import com.example.management.service.StudentImpl;
-import com.example.management.service.TeacherImpl;
+import com.example.management.service.StudentService;
+import com.example.management.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +15,9 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
-    private TeacherImpl teacherImpl;
+    private TeacherService teacherService;
     @Autowired
-    private StudentImpl studentImpl;
+    private StudentService studentService;
 
     @GetMapping("/user/testing")
     public String testing() {
@@ -33,27 +33,27 @@ public class StudentController {
     // to save user
     @GetMapping("/save-student")
     public Student saveStudent(@RequestBody Student student) {
-        return studentImpl.saveStudent(student);
+        return studentService.saveStudent(student);
     }
 
     //    to get user by id
     @GetMapping("/get-student/{id}")
     public Student getStudentById(@PathVariable("id") int id) {
-        return studentImpl.get(id);
+        return studentService.get(id);
 
     }
 
     //    to get all student
     @GetMapping("/get-all-student")
     public List<Student> getAllStudent() {
-        return studentImpl.getAll();
+        return studentService.getAll();
     }
 
 //    to update student
     @PutMapping("/update-student")
     public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
 
-        Student stu = studentImpl.updateStudent(student);
+        Student stu = studentService.updateStudent(student);
 
         if (stu != null) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(stu);

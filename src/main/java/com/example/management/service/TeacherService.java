@@ -3,19 +3,21 @@ package com.example.management.service;
 import com.example.management.models.Student;
 import com.example.management.models.Teacher;
 import com.example.management.repo.TeacherRepo;
+import com.fasterxml.jackson.core.JsonPointer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TeacherImpl {
+public class TeacherService {
 
     @Autowired
     private TeacherRepo teacherRepo;
 
     @Autowired
-    private StudentImpl studentImpl;
+    private StudentService studentService;
 
     public Teacher save(Teacher teacher) {
         return teacherRepo.save(teacher);
@@ -50,14 +52,37 @@ public class TeacherImpl {
                 }
             }
             if (toUpdate != null) {
-                studentImpl.saveStudent(toUpdate);
+                studentService.saveStudent(toUpdate);
                 return toUpdate;
             }
         }
         return null;
     }
 
-    public Student deleteStudent(int id, Student student) {
+
+    public Student deleteStudent(int teacherId, int studentId) {
+        int position = -1;
+        Optional<Teacher> teacher = teacherRepo.findById(teacherId);
+        Student toDelete = null;
+        if (teacher.isPresent()) {
+            for (Student stu : teacher.get().getStudents()) {
+                position += 1;
+                if (stu.getId() == studentId) {
+                    toDelete = stu;
+                    System.out.println(toDelete);
+                    break;
+                }
+            }
+            if (toDelete != null) {
+                teacher.get().getStudents().remove(position);
+                studentService.deleteStudent(toDelete);
+                return toDelete;
+            }
+        }
         return null;
+    }
+
+    public List<Teacher> getAllTeacher() {
+        return teacherRepo.findAll();
     }
 }

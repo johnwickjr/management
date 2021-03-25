@@ -4,14 +4,11 @@ import com.example.management.models.Student;
 import com.example.management.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentImpl {
+public class StudentService {
 
     @Autowired
     private StudentRepo studentRepo;
@@ -36,5 +33,11 @@ public class StudentImpl {
             return student;
         }
         return null;
+    }
+
+    public void deleteStudent(Student toDelete) {
+        if (toDelete != null) {
+            studentRepo.delete(toDelete);
+        }
     }
 }

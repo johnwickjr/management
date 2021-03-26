@@ -12,13 +12,24 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    private String Address;
+    private String address;
     private String branch;
+    private String password;
+    private String role;
 
-    public Student(String name, String address, String branch) {
+
+    public Student(String name, String address, String branch, String password, String role) {
         this.name = name;
-        Address = address;
+        this.address = address;
         this.branch = branch;
+        this.password = password;
+        this.role = role;
+    }
+
+    public Student(String name, String password, String role) {
+        this.name = name;
+        this.password = password;
+        this.role = role;
     }
 
     public Student() {
@@ -41,11 +52,27 @@ public class Student {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getBranch() {
@@ -61,8 +88,10 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", Address='" + Address + '\'' +
+                ", address='" + address + '\'' +
                 ", branch='" + branch + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

@@ -84,4 +84,8 @@ public class TeacherService {
     public List<Teacher> getAllTeacher() {
         return teacherRepo.findAll();
     }
+
+    public Optional<Teacher> getTeacherByName(String name){
+        return teacherRepo.findByUserName(name);
+    }
 }

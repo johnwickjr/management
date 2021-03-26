@@ -19,7 +19,7 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/user/testing")
+    @GetMapping("/testing")
     public String testing() {
         return "working";
     }

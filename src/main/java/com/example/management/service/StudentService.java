@@ -40,4 +40,8 @@ public class StudentService {
             studentRepo.delete(toDelete);
         }
     }
+
+    public Optional<Student> getStudentByName(String name){
+        return studentRepo.findByName(name);
+    }
 }

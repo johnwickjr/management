@@ -55,11 +55,11 @@ public class TeacherController {
     @GetMapping("/save-teacher-for")
     public Teacher saveTeacherFor() {
 
-        Teacher teacher = new Teacher("tagrohan", "tagrohan", "ROLE_TEACHER");
+        Teacher teacher = new Teacher("tagsattu", "tag", "ROLE_TEACHER");
 
-        Student student = new Student("Ratan", "GZB", "B.tech", "ratan", "ROLE_STUDENT");
-        Student student2 = new Student("sattu", "GZB", "B.tech", "sattu", "ROLE_STUDENT");
-        Student student3 = new Student("rohan", "BSR", "B.tech", "rohan", "ROLE_STUDENT");
+        Student student = new Student("SAZ", "gui", "B.tech", "SAZ", "ROLE_STUDENT");
+        Student student2 = new Student("naz", "hai", "B.arch", "naz", "ROLE_STUDENT");
+        Student student3 = new Student("raz", "yo", "BSC", "raz", "ROLE_STUDENT");
 
         teacher.setStudents(Arrays.asList(student3, student2, student));
 

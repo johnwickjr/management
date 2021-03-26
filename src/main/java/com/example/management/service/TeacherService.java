@@ -6,8 +6,7 @@ import com.example.management.repo.TeacherRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TeacherService {
@@ -85,7 +84,26 @@ public class TeacherService {
         return teacherRepo.findAll();
     }
 
-    public Optional<Teacher> getTeacherByName(String name){
+    public Optional<Teacher> getTeacherByName(String name) {
         return teacherRepo.findByUserName(name);
+    }
+
+    public List<Teacher> getTeacherByAnyKey(String regex) {
+        List<Teacher> teacher = new ArrayList<>();
+        try {
+            int anInt = Integer.parseInt(regex);
+            teacher = teacherRepo.findAllById(Collections.singletonList(anInt));
+        } catch (NumberFormatException e) {
+            if (teacherRepo.findByUserNameList(regex).size() == 0) {
+                if (teacherRepo.getTeacherByRole(regex).size() == 0) {
+                    return teacher;
+                } else {
+                    return teacherRepo.getTeacherByRole(regex);
+                }
+            } else {
+                return teacherRepo.findByUserNameList(regex);
+            }
+        }
+        return teacher;
     }
 }

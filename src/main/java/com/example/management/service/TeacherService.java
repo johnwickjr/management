@@ -3,7 +3,6 @@ package com.example.management.service;
 import com.example.management.models.Student;
 import com.example.management.models.Teacher;
 import com.example.management.repo.TeacherRepo;
-import com.fasterxml.jackson.core.JsonPointer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

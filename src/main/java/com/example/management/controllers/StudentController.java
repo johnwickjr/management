@@ -40,7 +40,6 @@ public class StudentController {
     @GetMapping("/get-student/{id}")
     public Student getStudentById(@PathVariable("id") int id) {
         return studentService.get(id);
-
     }
 
     //    to get all student

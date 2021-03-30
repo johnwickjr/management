@@ -4,6 +4,7 @@ import com.example.management.models.Student;
 import com.example.management.service.StudentService;
 import com.example.management.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +49,7 @@ public class StudentController {
         return studentService.getAll();
     }
 
-//    to update student
+    //    to update student
     @PutMapping("/update-student")
     public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
 
@@ -58,6 +59,13 @@ public class StudentController {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(stu);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @GetMapping("/testing-paging/{noOfPage}")
+    public List<Student> getStudentViaPaging(@PathVariable("noOfPage") int noOfPage) {
+        Page<Student> students = studentService.testingPaging(noOfPage, 4);
+        return students.getContent();
+
     }
 
 }

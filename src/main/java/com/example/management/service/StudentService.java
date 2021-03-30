@@ -3,6 +3,9 @@ package com.example.management.service;
 import com.example.management.models.Student;
 import com.example.management.repo.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -74,4 +77,11 @@ public class StudentService {
         }
         return students;
     }
+
+    public Page<Student> testingPaging(int currentPage, int studentPerPage) {
+        Pageable pageable = PageRequest.of(currentPage, studentPerPage);
+        return studentRepo.testingPaging(pageable);
+    }
+
+
 }

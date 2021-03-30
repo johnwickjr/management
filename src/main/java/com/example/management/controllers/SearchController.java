@@ -20,7 +20,7 @@ public class SearchController {
     private TeacherService teacherService;
 
     @Autowired
-   private StudentService studentService;
+    private StudentService studentService;
 
     @GetMapping("/search-teacher/{regex}")
     public ResponseEntity<List<Teacher>> findAndTeacher(@PathVariable("regex") String regex) {
